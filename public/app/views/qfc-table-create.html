@@ -1,0 +1,25 @@
+<table datatable="ng" class="row-border hover">
+   <thead>
+   <tr>
+      <th>Person ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr ng-repeat="person in persons">
+      <td>{{ person.id }}</td>
+      <td>{{ person.firstName }}</td>
+      <td>{{ person.lastName }}</td>
+      <td>
+         <button type="button" ng-click="modifyPerson($index)" class="btn btn-sm btn-warning">
+            <em class="fa fa-edit"></em>
+         </button>
+         <button type="button" ng-click="removePerson($index)" class="btn btn-sm btn-danger">
+            <em class="fa fa-trash-o"></em>
+         </button>
+      </td>
+   </tr>
+   </tbody>
+</table>

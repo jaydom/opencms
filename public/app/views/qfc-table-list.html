@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Data Tables |
+        <div class="pull-right">
+            <button ng-click="upload()" class="btn btn-default btn-xs"><em class="fa fa-upload"></em> 上传</button>
+            <button ng-click="download()" class="btn btn-default btn-xs"><em class="fa fa-upload"></em> 下载</button>
+        </div>
+        <small>Zero Configuration</small>
+    </div>
+    <div class="panel-body">
+        <table datatable="ng" class="row-border hover">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>考试时间</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data_item in data_set">
+                <td>{{ data_item["id"] }}</td>
+                <td>{{ data_item["player_name"] }}</td>
+                <td>{{ data_item["exam_time"] }}</td>
+                <td>
+                    <button type="button" ng-click="modifyPerson(data_item['id'])" class="btn btn-sm btn-warning">
+                        <em class="fa fa-edit"></em>
+                    </button>
+                    <button type="button" ng-click="removePerson(data_item['id'],data_item['player_name'])" class="btn btn-sm btn-danger">
+                        <em class="fa fa-trash-o"></em>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/ng-template" id="confirmDialogId">
+        <div class="ngdialog-message"><h3>确认删除?</h3><p>{{ confirmValue }}</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-danger mr">确认</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">取消</button></div>
+    </script>
+</div>

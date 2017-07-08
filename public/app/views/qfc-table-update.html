@@ -1,0 +1,197 @@
+<div ng-controller="FormValidationController" class="container-fluid">
+<div class="row">
+      <div class="col-md-12">
+         <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+            <!-- START panel-->
+            <div class="panel panel-default" ng-if="data!=''">
+               <div class="panel-body">
+                  <fieldset class="b0">
+                        <div class="pull-right">
+                           <button ng-click="back_to_list()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
+                        </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">编号</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="id" required="" ng-model="data['id']" class="form-control" disabled/>
+                           <span ng-show="validateInput('id', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="name" required="" ng-model="data['player_name']" class="form-control" />
+                           <span ng-show="validateInput('name', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-6">
+                           <select name="sex" required="" ng-model="data['sex']" class="form-control">
+                              <option value="男">男</option>
+                              <option value="女">女</option>
+                           </select>
+                           <span ng-show="validateInput('sex', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="telno" required="" ng-model="data['tel']" class="form-control" />
+                           <span ng-show="validateInput('telno', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">考区</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="exam_area" required="" ng-model="data['exam_area']" class="form-control" />
+                           <span ng-show="validateInput('exam_area', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">考场</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="exam_address" required="" ng-model="data['exam_address']" class="form-control" />
+                           <span ng-show="validateInput('exam_address', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">身份证号</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="idcard" required="" ng-model="data['idcard']" class="form-control" />
+                           <span ng-show="validateInput('idcard', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">报考项目</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="exam_type" required="" ng-model="data['exam_type']" class="form-control" />
+                           <span ng-show="validateInput('exam_type', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">报考等级</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="exam_level" required="" ng-model="data['exam_level']" class="form-control" />
+                           <span ng-show="validateInput('exam_level', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div ng-controller="DatepickerDemoCtrl" class="form-group">
+                        <label class="col-sm-2 control-label">考试日期</label>
+                        <div class="col-sm-6">
+                           <p class="input-group">
+                              <input type="text" name="exam_time" required="" datepicker-popup="{{format}}" ng-model="data['exam_time']" is-open="opened"  datepicker-options="dateOptions"  close-text="Close"
+                                     class="form-control" />
+                              <span class="input-group-btn">
+                                 <button type="button" ng-click="open($event)" class="btn btn-default">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                           <span ng-show="validateInput('exam_time', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">证书编号</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="cert_id" required="" ng-model="data['cert_id']" class="form-control" />
+                           <span ng-show="validateInput('cert_id', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">必须</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  </fieldset>
+                     <div ng-controller="DatepickerDemoCtrl" class="form-group">
+                        <label class="col-sm-2 control-label">发证日期</label>
+                        <div class="col-sm-6">
+                           <p class="input-group">
+                              <input type="text" name="cert_time" required="" datepicker-popup="{{format}}" ng-model="data['cert_time']" is-open="opened" max-date="'2020-06-22'" datepicker-options="dateOptions"  close-text="Close"
+                                     class="form-control" />
+                              <span class="input-group-btn">
+                                    <button type="button" ng-click="open($event)" class="btn btn-default">
+                                       <em class="fa fa-calendar"></em>
+                                    </button>
+                                 </span>
+                           </p>
+                           <span ng-show="validateInput('cert_time', 'required')" class="text-danger">必须填写</span>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">培训单位</label>
+                        <div class="col-sm-6">
+                           <input type="text" name="club" ng-model="data['club']" class="form-control" />
+                        </div>
+                        <div class="col-sm-4">
+                           <small class="text-muted">可选</small>
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">考级证书</label>
+                        <div class="col-sm-6">
+                           <img ng-src="{{'/certs/'+ data['cert_id'] + '.jpg'}}" class="img-responsive">
+                        </div>
+                     </div>
+                  </fieldset>
+               </div>
+            </div>
+            <div>
+               <div class="panel-footer text-center">
+                  <button type="submit" class="btn btn-info">保存修改</button>
+               </div>
+            </div>
+            <!-- END panel-->
+         </form>
+      </div>
+   </div>
+</div>

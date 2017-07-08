@@ -1,0 +1,110 @@
+{
+  "dashboard": {
+    "WELCOME": "欢迎，使用 {{appName}}"
+  },
+  "topbar": {
+    "messages": {
+      "UNREAD": "未读消息",
+      "MORE": "更多消息"
+    },
+    "search": {
+      "PLACEHOLDER": "请输入并点击回车..."
+    },
+    "notification": {
+      "MORE": "更多提醒"
+    }
+  },
+  "offsidebar": {
+    "setting": {
+      "SETTINGS": "设置",
+      "THEMES": "主题",
+      "layout": {
+        "FIXED": "固定",
+        "COLLAPSED": "适应"
+      }
+    },
+    "chat": {
+      "CONNECTIONS": "连接",
+      "SEARCH": "查找",
+      "ONLINE": "在线",
+      "OFFLINE": "离线",
+      "LOAD_MORE": "更多",
+      "TASK_COMPLETION": "任务完成",
+      "QUOTA": "上传配额"
+    }
+  },
+  "sidebar": {
+    "WELCOME": "欢迎",
+    "heading": {
+      "HEADER": "主导航",
+      "COMPONENTS": "组件",
+      "MORE": "更多"
+    },
+    "nav": {
+      "DASHBOARD": "总览",
+      "WIDGETS": "控件",
+      "WIDGETS": "控件",
+      "DOCUMENTATION": "文档",
+      "element": {
+        "ELEMENTS": "元素",
+        "BUTTON": "按钮",
+        "COLOR": "颜色",
+        "NOTIFICATION": "通知",
+        "INTERACTION": "交互",
+        "SPINNER": "下拉列表",
+        "ANIMATION": "动画",
+        "DROPDOWN": "下拉列表",
+        "PANEL": "面板",
+        "PORTLET": "门户",
+        "GRID": "网格",
+        "GRID_MASONRY": "网格砌筑",
+        "TYPO": "排版",
+        "FONT_ICON": "字体图标",
+        "WEATHER_ICON": "天气图标"
+      },
+      "form": {
+        "FORM": "表单",
+        "STANDARD": "标准",
+        "EXTENDED": "扩展",
+        "VALIDATION": "验证",
+        "WIZARD": "向导",
+        "UPLOAD": "上传"
+      },
+      "chart": {
+        "CHART": "图表",
+        "FLOT": "曲线",
+        "RADIAL": "射线"
+      },
+      "table": {
+        "TABLE": "表格",
+        "STANDARD": "标准",
+        "EXTENDED": "扩展",
+        "DATATABLE": "数据表"
+      },
+      "map": {
+        "MAP": "地图",
+        "GOOGLE": "谷歌地图",
+        "VECTOR": "矢量地图"
+      },
+      "extra": {
+        "EXTRA": "附加",
+        "MAILBOX": "邮箱",
+        "TIMELINE": "时间轴",
+        "CALENDAR": "日历",
+        "INVOICE": "发票",
+        "SEARCH": "查找",
+        "TODO": "待办列表",
+        "PROFILE": "配置文件"
+      },
+      "pages": {
+        "PAGES": "页面",
+        "LOGIN": "登陆",
+        "REGISTER": "注册",
+        "RECOVER": "找回密码",
+        "PROFILE": "配置文件",
+        "LOCK": "锁定",
+        "STARTER": "新手模板"
+      }
+    }
+  }
+}

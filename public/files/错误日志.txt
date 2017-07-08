@@ -1,0 +1,45 @@
+<150>May 22 04:11:44 node-19 glance-api: 2017-05-22 04:11:44.919 26383 INFO swiftclient [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] REQ: curl -i http://192.168.0.2:8080/swift/v1/glance -I -H "X-Auth-Token: gAAAAABZImUAu4Fw-d35DgT8e0LKtsbHObia1HoRwJ_hhjv4areHoIFHYhNamGDBqEqs15qMnRqBLkOpzEou9tR0cAu4Pa9QoZpsnOzsgRGLaS4KtcEotcTVKk833GK0g3dbHfofhNyF-fStjTMz1i8YR54pchkogTlOB6Wy3k8EpgxL3rCtoYQ"
+<150>May 22 04:11:44 node-19 glance-api: 2017-05-22 04:11:44.920 26383 INFO swiftclient [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] RESP STATUS: 400 Bad Request
+<150>May 22 04:11:44 node-19 glance-api: 2017-05-22 04:11:44.920 26383 INFO swiftclient [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] RESP HEADERS: [('date', 'Mon, 22 May 2017 04:11:44 GMT'), ('content-length', '0'), ('content-type', 'text/html; charset=UTF-8'), ('connection', 'close'), ('x-trans-id', 'tx1f48e5e11bf442fc9f113-0059226500')]
+<147>May 22 04:11:44 node-19 glance-api: 2017-05-22 04:11:44.921 26383 ERROR swiftclient [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] Container HEAD failed: http://192.168.0.2:8080/swift/v1/glance 400 Bad Request
+2017-05-22 04:11:44.921 26383 ERROR swiftclient Traceback (most recent call last):
+2017-05-22 04:11:44.921 26383 ERROR swiftclient   File "/usr/lib/python2.7/dist-packages/swiftclient/client.py", line 1390, in _retry
+2017-05-22 04:11:44.921 26383 ERROR swiftclient     service_token=self.service_token, **kwargs)
+2017-05-22 04:11:44.921 26383 ERROR swiftclient   File "/usr/lib/python2.7/dist-packages/swiftclient/client.py", line 760, in head_container
+2017-05-22 04:11:44.921 26383 ERROR swiftclient     http_response_content=body)
+2017-05-22 04:11:44.921 26383 ERROR swiftclient ClientException: Container HEAD failed: http://192.168.0.2:8080/swift/v1/glance 400 Bad Request
+2017-05-22 04:11:44.921 26383 ERROR swiftclient 
+<147>May 22 04:11:44 node-19 glance-api: 2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] Failed to upload image 433b2d87-c822-44b4-8b37-2f8f97c26ce4
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils Traceback (most recent call last):
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/glance/api/v1/upload_utils.py", line 130, in upload_data_to_store
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     context=req.context)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/glance_store/backend.py", line 342, in store_add_to_backend
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     context=context)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/glance_store/capabilities.py", line 226, in op_checker
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     return store_op_fun(store, *args, **kwargs)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/glance_store/_drivers/swift/store.py", line 500, in add
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     self._create_container_if_missing(location.container, connection)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/glance_store/_drivers/swift/store.py", line 683, in _create_container_if_missing
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     connection.head_container(container)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/swiftclient/client.py", line 1449, in head_container
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     return self._retry(None, head_container, container)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/swiftclient/client.py", line 1390, in _retry
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     service_token=self.service_token, **kwargs)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils   File "/usr/lib/python2.7/dist-packages/swiftclient/client.py", line 760, in head_container
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils     http_response_content=body)
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils ClientException: Container HEAD failed: http://192.168.0.2:8080/swift/v1/glance 400 Bad Request
+2017-05-22 04:11:44.922 26383 ERROR glance.api.v1.upload_utils 
+<150>May 22 04:11:45 node-19 glance-registry: 2017-05-22 04:11:45.103 26351 INFO glance.registry.api.v1.images [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] Updating metadata for image 433b2d87-c822-44b4-8b37-2f8f97c26ce4
+<150>May 22 04:11:45 node-19 glance-registry: 2017-05-22 04:11:45.104 26351 INFO eventlet.wsgi.server [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] 192.168.0.2 - - [22/May/2017 04:11:45] "PUT /images/433b2d87-c822-44b4-8b37-2f8f97c26ce4 HTTP/1.1" 200 711 0.177314
+<150>May 22 04:11:45 node-19 glance-api: 2017-05-22 04:11:45.139 26383 INFO eventlet.wsgi.server [req-40c88a97-288b-4476-baeb-2f10c449ee7f 7b00d03c03d240e68c03a8927d012a2d 6f18040257e04772a2546b23e4484993 - - -] 192.168.0.2 - - [22/May/2017 04:11:45] "POST /v1/images HTTP/1.1" 500 426 2.368936
+<150>May 22 04:11:46 node-19 glance-api: 2017-05-22 04:11:46.098 26388 INFO eventlet.wsgi.server [-] 192.168.0.8 - - [22/May/2017 04:11:46] "OPTIONS /versions HTTP/1.0" 200 791 0.000891
+<150>May 22 04:11:46 node-19 glance-api: 2017-05-22 04:11:46.554 26377 INFO eventlet.wsgi.server [-] 192.168.0.2 - - [22/May/2017 04:11:46] "OPTIONS /versions HTTP/1.0" 200 791 0.001211
+<150>May 22 04:11:51 node-19 glance-api: 2017-05-22 04:11:51.838 26402 INFO eventlet.wsgi.server [-] 192.168.0.7 - - [22/May/2017 04:11:51] "OPTIONS /versions HTTP/1.0" 200 791 0.001152
+<150>May 22 04:11:56 node-19 glance-api: 2017-05-22 04:11:56.119 26403 INFO eventlet.wsgi.server [-] 192.168.0.8 - - [22/May/2017 04:11:56] "OPTIONS /versions HTTP/1.0" 200 791 0.001173
+<150>May 22 04:11:56 node-19 glance-api: 2017-05-22 04:11:56.608 26403 INFO eventlet.wsgi.server [-] 192.168.0.2 - - [22/May/2017 04:11:56] "OPTIONS /versions HTTP/1.0" 200 791 0.001179
+<150>May 22 04:12:01 node-19 glance-api: 2017-05-22 04:12:01.638 26396 INFO eventlet.wsgi.server [-] 192.168.0.7 - - [22/May/2017 04:12:01] "OPTIONS /versions HTTP/1.0" 200 791 0.001210
+<150>May 22 04:12:06 node-19 glance-api: 2017-05-22 04:12:06.184 26387 INFO eventlet.wsgi.server [-] 192.168.0.8 - - [22/May/2017 04:12:06] "OPTIONS /versions HTTP/1.0" 200 791 0.001340
+<150>May 22 04:12:06 node-19 glance-api: 2017-05-22 04:12:06.594 26377 INFO eventlet.wsgi.server [-] 192.168.0.2 - - [22/May/2017 04:12:06] "OPTIONS /versions HTTP/1.0" 200 791 0.001069
+<150>May 22 04:12:11 node-19 glance-api: 2017-05-22 04:12:11.879 26396 INFO eventlet.wsgi.server [-] 192.168.0.7 - - [22/May/2017 04:12:11] "OPTIONS /versions HTTP/1.0" 200 791 0.000602
+<150>May 22 04:12:16 node-19 glance-api: 2017-05-22 04:12:16.341 26382 INFO eventlet.wsgi.server [-] 192.168.0.2 - - [22/May/2017 04:12:16] "OPTIONS /versions HTTP/1.0" 200 791 0.001098
+<150>May 22 04:12:16 node-19 glance-api: 2017-05-22 04:12:16.421 26382 INFO eventlet.wsgi.server [-] 192.168.0.8 - - [22/May/2017 04:12:16] "OPTIONS /versions HTTP/1.0" 200 791 0.001097
