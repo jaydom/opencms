@@ -1,0 +1,38 @@
+<div class="form-group" ng-controller="addressController">
+    <label class="col-sm-2 control-label">{{item.title}}</label>
+    <div class="col-sm-6 ">
+        <div class="input-group" uib-dropdown  auto-close="outsideClick">
+            <ul class="dropdown-menu" uib-dropdown-menu>
+                <li class="form-inline">
+                    <div class="input-group"></div>
+                    <div class="input-group">
+                        <select ng-model="sheng" ng-options="m.name for m in province" class="form-control">
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select  ng-model="shi" ng-options="m.name for m in sheng.city"  class="form-control">
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select  ng-model="qu" ng-options="m for m in shi.area" class="form-control">
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <button class="btn btn-success" data-toggle="dropdown" ng-click="select_address($index)" uib-dropdown-toggle>确定</button>
+                    </div>
+                    <div class="input-group">
+                        <button class="btn btn-error" data-toggle="dropdown" uib-dropdown-toggle>取消</button>
+                    </div>
+                    <div class="input-group"></div>
+                </li>
+            </ul>
+            <input class="form-control"  type="text" name="{{item.field}}" ng-model="$parent.data[$index]" ng-disabled="item.component_disable" ng-required="item.required"/>
+            <div class="input-group-btn">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"  uib-dropdown-toggle ><span class="fa fa-edit"></span></button>
+            </div>
+        </div><!-- /input-group -->
+    </div>
+    <div class="col-sm-4"  ng-if="item.required">
+        <small class="text-muted">必须</small>
+    </div>
+</div>

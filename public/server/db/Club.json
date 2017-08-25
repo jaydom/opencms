@@ -1,0 +1,14 @@
+{
+  "db_cols":[
+    {"field":"id","title":"编号","sortable": "yes","show": false,"type":"Number","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"sort_id","title":"序号","sortable": "yes","show": false,"type":"serial","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"name","title":"名称","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"address","title":"地址","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"contacter","title":"联系人","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"contacter_email","title":"联系人邮箱","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"contacter_telno","title":"联系人电话","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"create_date","title":"创建日期","sortable": "yes","show": true,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"update_date","title":"更新日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"delete_date","title":"删除日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false}
+  ]
+}

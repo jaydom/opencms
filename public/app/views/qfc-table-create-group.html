@@ -1,0 +1,42 @@
+<div  class="container-fluid">
+   <div class="row" ng-controller="CreateValidationController">
+      <div class="col-md-12">
+         <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+            <!-- START panel-->
+            <div class="panel panel-default"  ng-if="data!=''" >
+               <div class="panel-body">
+                  <fieldset class="b0">
+                     <div class="pull-right">
+                        <button ng-click="to_list_page()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
+                     </div>
+                  </fieldset>
+                  <fieldset ng-repeat="item in table_profile['fieldset']" ng-include="'app/views/components/'+item['component'] +'.html'" ng-if="!item.component_disable">
+                  </fieldset>
+               </div>
+               <div>
+                  <div class="panel-footer text-center">
+                     <button type="submit" class="btn btn-info" ng-disabled="disable_create_btn" >保存修改</button>
+                  </div>
+               </div>
+            </div>
+
+            <!-- END panel-->
+            <div class="panel panel-default"  ng-if="data==''" >
+               <div class="panel-body">
+                  <fieldset class="b0">
+                     <div class="pull-right">
+                        <button ng-click="back_to_list()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
+                     </div>
+                  </fieldset>
+               </div>
+            </div>
+         </form>
+      </div>
+      <script type="text/ng-template" id="confirmDialogId">
+         <div class="ngdialog-message"><h3>修改成功</h3><p>{{ confirmValue }}</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-success mr">确认</button></div>
+      </script>
+      <script type="text/ng-template" id="errorDialogId">
+         <div class="ngdialog-message"><h3>提交失败</h3><p>{{ confirmValue }}</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-danger mr">确认</button></div>
+      </script>
+   </div>
+</div>

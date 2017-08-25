@@ -5,7 +5,7 @@
             <div class="panel panel-default">
                <div class="panel-body">
                   <h4 class="page-header mt0">选择文件 [仅支持xls格式]<div class="pull-right">
-                     <button ng-click="back_to_list()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
+                     <button ng-click="to_list_page()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
                   </div></h4>
                   <div ng-show="false">
                      <!-- 3. nv-file-over uploader="link" over-class="className"-->
@@ -41,7 +41,7 @@
                         <tbody>
                         <tr ng-repeat="item in uploader.queue">
                            <td>
-                              <strong>{{ item.file.name }}</strong>
+                              <strong>{{ item.file.name }}</strong><span style="color: red"> {{item.error}}</span>
                            </td>
                            <td ng-show="uploader.isHTML5" nowrap="">{{ item.file.size/1024/1024|number:2 }} MB</td>
                            <td ng-show="uploader.isHTML5">
@@ -57,7 +57,7 @@
                                     <em class="fa fa-ban-circle fa-fw"></em>
                                  </span>
                               <span ng-show="item.isError">
-                                    <em class="fa fa-times fa-fw"></em>
+                                    <em class="fa fa-times fa-fw" style="color: red"></em>
                                  </span>
                            </td>
                            <td nowrap="">

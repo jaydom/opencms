@@ -1,0 +1,24 @@
+{
+  "db_cols":[
+    {"field":"id","title":"编号","sortable": "yes","show": false,"type":"Number","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"sort_id","title":"编号","sortable": "yes","show": false,"type":"serial","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"player_id","title":"运动员编号","sortable": "yes","show": false,"type":"Number","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"player_name","title":"名字","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"sex","title":"性别","sortable": "yes","show": true,"type":"String","filter":"no","component":"select","select_option":["男","女"],"component_disable":false,"required":true},
+    {"field":"tel","title":"电话","sortable": "yes","show": false,"type":"String","filter":"no","component":"text","component_disable":false,"required":true},
+    {"field":"idcard","title":"身份证","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"exam_type","title":"考试类型","sortable": "yes","show": true,"type":"String","filter":"no","component":"text","component_disable":false,"required":true},
+    {"field":"exam_level","title":"考试等级","sortable": "yes","show": true,"type":"Number","filter":"no","component":"text","component_disable":false,"required":true},
+    {"field":"exam_area","title":"考区","sortable": "yes","show": false,"type":"String","filter":"no","component":"text","component_disable":false,"required":true},
+    {"field":"exam_address","title":"考场","sortable": "yes","show": false,"type":"String","filter":"no","component":"text","component_disable":false,"required":true},
+    {"field":"exam_time","title":"考试时间","sortable": "yes","show": false,"type":"Date","filter":"no","component":"datetime","component_disable":false,"required":true},
+    {"field":"cert_id","title":"证书编号","sortable": "yes","show": false,"type":"Number","filter":"no","component":"text","component_disable":false,"required":true},
+    {"field":"cert_time","title":"颁证时间","sortable": "yes","show": false,"type":"Date","filter":"no","component":"datetime","component_disable":false,"required":true},
+    {"field":"cert_image","title":"证书图片","sortable": "yes","show": false,"type":"String","filter":"no","component":"image","component_disable":true,"required":true},
+    {"field":"cert_image_md5","title":"证书MD5","sortable": "yes","show": false,"type":"String","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"club","title":"培训机构","sortable": "yes","show": false,"type":"String","filter":"no","component":"text","component_disable":false},
+    {"field":"create_date","title":"创建日期","sortable": "yes","show": true,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"update_date","title":"更新日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"delete_date","title":"删除日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false}
+  ]
+}

@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{item.title}}</label>
+    <div class="col-sm-6">
+        <input type="text" name="{{item.field}}" ng-model="$parent.data[$index]" class="form-control"  ng-disabled="item.component_disable" ng-required="item.required"/>
+        <span ng-show="validateInput('{{item.field}}', 'required')" class="text-danger" ng-if="item.required">必须填写</span>
+    </div>
+    <div class="col-sm-4"  ng-if="item.required">
+        <small class="text-muted">必须</small>
+    </div>
+</div>

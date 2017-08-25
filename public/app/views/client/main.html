@@ -1,0 +1,41 @@
+<script type="text/ng-template" id="sidebar-renderer.html">
+    <span ng-if="item.heading">{{(item.translate | translate) || item.text}}</span><a ng-if="!item.heading" ng-href="{{$state.href(item.sref, item.params)}}" title="{{item.text}}"><em ng-if="item.icon" class="{{item.icon}}"></em><div ng-if="item.alert" ng-class="item.label || 'label label-success'" class="pull-right">{{item.alert}}</div><span>{{(item.translate | translate) || item.text}}</span></a><ul ng-if="item.submenu" collapse="isCollapse(pIndex)" ng-init="addCollapse(pIndex, item)" class="nav sidebar-subnav"><li class="sidebar-subnav-header">{{(item.translate | translate) || item.text}}</li><li ng-repeat="item in item.submenu" ng-include="'sidebar-renderer.html'" ng-class="getMenuItemPropClasses(item)" ng-init="pIndex=(pIndex+'-'+$index); inSubmenu = true" ng-click="toggleCollapse(pIndex)"></li></ul>
+</script>
+<header class="navbar navbar-static-top bs-docs-nav" id="top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#/c/home" class="navbar-brand">广东轮滑协会</a>
+        </div>
+        <nav id="bs-navbar" class="navbar-collapse collapse in" aria-expanded="true">
+            <ul class="nav navbar-nav">
+                <li ng-class='{active: $index==active}' ng-repeat="item in menuItems" ng-init="pIndex = $index"  ng-click="toggleCollapse(pIndex, true)"><a href="{{item.url}}">{{item.name}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li><a href="http://mb.bootcss.com" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', 'themes'])" target="_blank">主题/模板</a></li>
+                <li><a href="http://www.bootcss.com/"  target="_blank">登陆</a></li>
+                <li><a href="http://www.bootcss.com/"  target="_blank">注册</a></li>-->
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div ui-view="" autoscroll="false" class="ng-zoomBackDown ng-fluid"></div>
+
+<footer class="bs-docs-footer">
+    <div class="container">
+        <ul class="bs-docs-footer-links">
+            <li><a href="#/c/home">首页</a></li>
+            <li><a href="#/c/about">关于</a></li>
+            <li><a href="/admin">管理</a></li>
+        </ul>
+
+        <p>地址：广东轮滑协会</p>
+
+    </div>
+</footer>

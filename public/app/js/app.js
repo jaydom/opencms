@@ -26,7 +26,8 @@ var App = angular.module('angle', [
     'ngSanitize',
     'ngResource',
     'tmh.dynamicLocale',
-    'ui.utils'
+    'ui.utils',
+    'angular-md5'
   ]);
 
 App.run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache', function ($rootScope, $state, $stateParams, $window, $templateCache) {
@@ -377,8 +378,8 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
     })
     .state('app.table-nggrid', {
         url: '/table-nggrid',
-        templateUrl: helper.basepath('table-ng-grid.html'),
-        resolve: helper.resolveFor('ngGrid')
+        templateUrl: helper.basepath('qfc-table-ng-grid.html'),
+        resolve: helper.resolveFor('ngTable','ui-bootstrap','ngDialog')
     })
     .state('app.table-uigrid', {
         url: '/table-uigrid',
@@ -871,7 +872,8 @@ App
       {name: 'ng-nestable',               files: ['vendor/ng-nestable/src/angular-nestable.js',
                                                   'vendor/nestable/jquery.nestable.js']},
       {name: 'akoenig.deckgrid',          files: ['vendor/angular-deckgrid/angular-deckgrid.js']},
-        {name:'ng-file-upload', files: ['vendor/ng-file-upload/dist/ng-file-upload-all.js']}
+        {name: 'ui-bootstrap',          files: ['vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js']},
+
     ]
   })
 ;
@@ -880,7 +882,7 @@ App
  * Demo for login api
  =========================================================*/
 
-App.controller('LoginFormController', ['$rootScope','$scope', '$http', '$state', function($rootScope,$scope, $http, $state) {
+App.controller('LoginFormController', ['$rootScope','$scope', '$http', '$state','md5', function($rootScope,$scope, $http, $state,md5) {
 
   // bind here all data from the form
   $scope.account = {};
@@ -893,23 +895,22 @@ App.controller('LoginFormController', ['$rootScope','$scope', '$http', '$state',
     if($scope.loginForm.$valid) {
 
       $http
-        .post('api/account/login', {email: $scope.account.email, password: $scope.account.password})
+        .post('api/account/login', {email: $scope.account.email, password: md5.createHash($scope.account.password)})
         .then(function(response) {
           // assumes if ok, response is an object with some data, if not, a string with error
           // customize according to your api
-          if ( !response.data.token ) {
-            $scope.authMsg = 'Incorrect credentials.';
+          if ( typeof(response.data.token) == 'undefined' ) {
+            $scope.authMsg = '用户或密码不正确.';
           }else{
             $rootScope.isUserAuth = true;
             $rootScope.$storage["token"] = response.data.token;
             $state.go('app.dashboard');
             $rootScope.$broadcast('user.login.success', {
               // 需要传输的数据
-
             });
           }
         }, function(x) {
-          $scope.authMsg = 'Server Request Error';
+          $scope.authMsg = '服务器错误';
         });
     }
     else {
@@ -2171,7 +2172,22 @@ App.controller('CarouselDemoCtrl', ['$scope', function ($scope) {
  * Provides a simple demo for bootstrap datepicker
  =========================================================*/
 
-App.controller('DatepickerDemoCtrl', ['$scope', function ($scope) {
+App.controller('DatepickerDemoCtrl', ['$scope','$filter', function ($scope,$filter) {
+    var date_index = 0;
+    this.init = function (index) {
+        date_index = index;
+        $scope.date_cache = $scope.data[index];
+    }
+    $scope.$watch("date_cache",function (newval,oldval) {
+        if(typeof  newval != 'undefined'){
+            var val_type = (typeof  newval);
+            if(val_type == 'object'){
+                $scope.data[date_index] = $filter('date')(newval, 'yyyy-MM-dd');
+            }else if(val_type=='string'){
+                $scope.data[date_index] = $filter('date')(new Date(newval), 'yyyy-MM-dd');
+            }
+        }
+    });
   $scope.today = function() {
     $scope.dt = new Date();
   };
@@ -2179,11 +2195,6 @@ App.controller('DatepickerDemoCtrl', ['$scope', function ($scope) {
 
   $scope.clear = function () {
     $scope.dt = null;
-  };
-
-  // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
   };
 
   $scope.toggleMin = function() {
@@ -2199,13 +2210,51 @@ App.controller('DatepickerDemoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
+      formatYear: 'yyyy',
+      startingDay: 0
   };
 
-  $scope.initDate = new Date('2016-15-20');
+  $scope.initDate = new Date();
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[1];
+  $scope.format = 'yyyy-MM-dd';
+
+}]);
+
+App.controller('DatetimepickerDemoCtrl', ['$scope', function ($scope) {
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.initDate = new Date('2016-15-20');
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[1];
 
 }]);
 
@@ -4624,7 +4673,6 @@ App.controller('ChartRickshawController', ['$scope', function($scope) {
 
 App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$http', '$timeout', 'Utils',
   function($rootScope, $scope, $state, $http, $timeout, Utils){
-    console.log('SidebarController')
     var collapseList = [];
 
     // demo: when switch from collapse to hover, close all items
@@ -7624,3 +7672,99 @@ App.service('vectorMap', function() {
         }
   };
 });
+
+App.controller('addressController',['$scope','$filter','$resource','$http','NgTableParams','ngTableDefaults', 'ngDialog',function ($scope,$filter,$resource,$http,NgTableParams,ngTableDefaults,ngDialog){
+    $resource("server/ChineseCities.json",{},{'query': {method: 'get', isArray: true}}).query(function(profile) {
+        $scope.province = profile;
+    });
+    $scope.select_address = function (index) {
+        if (typeof $scope.sheng == 'undefined'||typeof $scope.shi == 'undefined'||typeof $scope.qu == 'undefined') {
+            //do nothing
+        }else if($scope.sheng["name"]==$scope.shi["name"] ){
+            $scope.data[index] = $scope.shi["name"] + "市" +$scope.qu;
+        }else{
+            $scope.data[index] = $scope.sheng["name"] + "省" +$scope.shi["name"] + "市" +$scope.qu;
+        }
+
+    }
+}]);
+
+App.controller('passwordController',['$scope','$filter','$resource','$http','NgTableParams','ngTableDefaults', 'ngDialog','md5',function ($scope,$filter,$resource,$http,NgTableParams,ngTableDefaults,ngDialog,md5){
+
+    this.init = function (index,item) {
+        var oldvalue = $scope.data[index];
+        var handle_password = function(){
+            if(typeof oldvalue=='undefined'){
+                $scope.data[index] = md5.createHash($scope.data[index]);
+            }else{
+                var newvalue = $scope.data[index];
+                if(oldvalue!=newvalue){
+                    $scope.data[index] = md5.createHash($scope.data[index]);
+                }
+            }
+        }
+        $scope.pre_handlers.push(handle_password);
+    }
+}]);
+
+App.controller('textForeignController',['$scope','$filter','$resource','$http','NgTableParams','ngTableDefaults', 'ngDialog',function ($scope,$filter,$resource,$http,NgTableParams,ngTableDefaults,ngDialog){
+    $scope.persons = [];
+    this.foreign_id_index = null;
+    this.foreign_name_index = null;
+    this.init = function (index,item) {
+        var key = item["foreign_id"];
+        this.foreign_id_index = $scope.table_profile.attrs_map[key];
+        this.foreign_name_index = index;
+        this.item = item;
+        var data_url = "/api/db/"+item["foreign_table"]+"/all"
+        $resource(data_url,{},{'query': {method: 'get', isArray: false}}).query(function(results) {
+            $scope.persons = results["datas"];
+        });
+    }
+
+    this.select_item = function (person) {
+        $scope.data[this.foreign_name_index] = person.name;
+        $scope.data[this.foreign_id_index] = person.id;
+    }
+
+
+}]);
+
+App.controller('ArrayController', ["$scope",'$stateParams','$state','$resource','$http','ngDialog', function ($scope,$stateParams,$state,$resource,$http,ngDialog) {
+    'use strict';
+    this.foreign_name_index = null;
+    this.init = function (index,item) {
+        this.item = item;
+        $scope.data[index] = [];
+        this.foreign_name_index = index;
+        var id_index = $scope.table_profile.attrs_map["id"];
+        var foreign_data_url = "/api/db/"+item["foreign_table"]+"/all";
+        var map_data_url = "/api/db/"+item["map_table"]+"/all";
+        $resource(foreign_data_url,{},{'query': {method: 'get', isArray: false}}).query().$promise.then(function(data_set) {
+            $scope.foreign_data = [];
+            $scope.foreign_data_map = {};
+            if(typeof data_set["datas"] == "undefined"){
+                $scope.foreign_data = [];
+            }else{
+                $scope.foreign_data = data_set["datas"];
+                for(var i in data_set["datas"]){
+                    var key = data_set["datas"][i]["id"];
+                    $scope.foreign_data_map[key] = i;
+                }
+            }
+            var filter = $.param( {filter:{ name:item['left_key'],op: 'eq',value:$scope.data[id_index]}});
+            $resource(map_data_url+'/?'+ filter,{},{'query': {method: 'get', isArray: false }}).query().$promise.then(function(data_set) {
+                var map_data = [];
+                if(typeof data_set["datas"] != "undefined"){
+                    for(var i in data_set["datas"]){
+                        var key = data_set["datas"][i][item['right_key']];
+                        var select_item_index = $scope.foreign_data_map[key];
+                        map_data.push($scope.foreign_data[select_item_index]);
+                    }
+                }
+                $scope.data[index] = map_data;
+            });
+        });
+    }
+}]);
+

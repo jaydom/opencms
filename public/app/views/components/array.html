@@ -1,0 +1,17 @@
+<div class="form-group"  ng-controller="ArrayController as demo" ng-init="demo.init($index,item)">
+    <label class="col-sm-2 control-label">{{item.title}}</label>
+    <div  class="col-sm-6">
+        <ui-select multiple=""  ng-model="$parent.data[$index]" theme="bootstrap" ng-disabled="disabled">
+            <ui-select-match placeholder="选择成员...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+            <ui-select-choices repeat="person in foreign_data | propsFilter: {name: $select.search, telno: $select.search}">
+                <div ng-bind-html="person.name | highlight: $select.search"></div>
+                <small>邮箱: {{person.email}} 电话:
+                    <span ng-bind-html="''+person.telno | highlight: $select.search"></span>
+                </small>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="col-sm-4"  ng-if="item.required">
+        <small class="text-muted">必须</small>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<!-- Docs page layout -->
+<div class="bs-docs-header" id="content" tabindex="-1">
+    <div class="container">
+        <h1>认证查询</h1>
+    </div>
+</div>
+
+<div class="container bs-docs-container"  ng-controller="queryCertController">
+    <div class="row">
+        <script type="text/ng-template" id="confirmDialogId">
+            <div class="ngdialog-message"><h3>没有查到相关数据，继续加油！</h3><button type="button" ng-click="confirm(confirmValue)" class="btn btn-success mr">确认</button></div>
+        </script>
+        <script type="text/ng-template" id="errorDialogId">
+            <div class="ngdialog-message"><h3>服务器错误</h3><button type="button" ng-click="confirm(confirmValue)" class="btn btn-danger mr">确认</button></div>
+        </script>
+        <div class="col-md-12" role="main">
+            <div class="bs-docs-section">
+                <h1 id="download" class="page-header"></h1>
+                <form name="formValidate" class="form-validate form-horizontal" ng-submit="submitForm()">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="name" name="user_name" ng-model="user_name" placeholder="请输入姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_card" class="col-sm-2 control-label">身份证</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="id_card"  name="user_idcard" ng-model="user_idcard" placeholder="请输入身份证">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <button type="submit" class="btn-info btn">查询</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8" role="main" ng-if="image_url!=''">
+            <div class="text-center">
+                <img ng-src="{{image_url}}" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>

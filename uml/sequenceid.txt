@@ -1,0 +1,71 @@
+create or replace function IDNextval return number is
+  Result Number;
+  lYear number;
+  cursor idsequence_cursor(nYear in varchar2) is select * from idsequence where year=nYear;
+  refidsequence idsequence_cursor%rowtype;
+begin
+  lYear := to_char(sysdate, 'yyyy');
+  Result := -1;
+   
+  open idsequence_cursor(lYear);
+  fetch idsequence_cursor into refidsequence;
+  if not idsequence_cursor%notfound then
+    Result := refidsequence.nextnumber;
+     
+    if refidsequence.nextnumber >= refidsequence.minvalue then --当前值大于等于最小值
+      if refidsequence.nextnumber >= refidsequence.maxvalue then --当前值大于等于最大值
+        if refidsequence.cycle = 1 then --循环则当前值等于最小值
+          update idsequence set nextnumber=minvalue where year=lYear;
+        else --不循环则当前值为最小值-1，即无效值
+          update idsequence set nextnumber=minvalue-1 where year=lYear;
+        end if;
+      else --当前值大于等于最小值小于最大值
+        if refidsequence.nextnumber+refidsequence.increaseby > refidsequence.maxvalue then --当前值加增量大于最大值
+          update idsequence set nextnumber=minvalue where year=lYear;
+        else 
+          update idsequence set nextnumber=nextnumber+reffeesdocidsequence.increaseby where year=lYear;
+        end if;
+      end if;  
+      commit;
+    end if;
+  end if;
+  close idsequence_cursor;
+   
+  return(Result);
+end IDNextval;
+
+
+SELECT TO_CHAR(CURRENT_DATE,'yyyymmdd');
+
+
+CREATE FUNCTION seqid_generate_v1 (IN name varchar) RETURNS varchar AS $$
+DECLARE
+    Result Number;
+	seq_date varchar;
+BEGIN
+    seq_date := to_char(sysdate, 'yyyy')
+	return seq_date
+END;
+$$ LANGUAGE SQL;
+
+
+CREATE OR REPLACE FUNCTION seqid_generate_v1(IN name varchar,OUT seqid varchar)
+  RETURNS "varchar" AS
+$BODY$
+DECLARE
+  v_retval varchar;
+  v_length integer;
+BEGIN
+  v_length = $1;
+  v_retval :=''||v_length||'wang'||$2;
+  return v_retval;
+END;
+$BODY$
+
+
+
+CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$
+    BEGIN
+        RETURN i + 1;
+	END;
+$$ LANGUAGE plpgsql;

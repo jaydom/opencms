@@ -22,23 +22,32 @@ router.get('/', function(req, res, next) {
             "translate": "sidebar.nav.DASHBOARD"
         },
         {
-            "text": "Admin",
+            "text": "裁判系统",
             "sref": "#",
-            "icon": "icon-note",
+            "icon": "icon-user",
             "submenu": [
-                { "text": "Standard",     "sref": "app.table-list-coach", "translate": "sidebar.nav.table.DATATABLE" },
-                { "text": "Extended",     "sref": "app.table-extended", "translate": "sidebar.nav.table.EXTENDED" },
-                { "text": "DataTables",   "sref": "app.table-datatable", "translate": "sidebar.nav.table.DATATABLE" },
-                { "text": "ngTables",     "sref": "app.table-ngtable" },
-                { "text": "ngGrid",       "sref": "app.table-nggrid" },
-                { "text": "uiGrid",       "sref": "app.table-uigrid" },
-                { "text": "xEditable",    "sref": "app.table-xeditable"},
-                { "text": "Angular Grid", "sref": "app.table-angulargrid"}
-            ],
-            "translate": "sidebar.nav.form.FORM"
+                { "text": "比赛管理",     "sref": "app.table-list-Game" },
+                { "text": "裁判管理",     "sref": "app.table-list-Referee" },
+                { "text": "裁判组管理",     "sref": "app.table-list-RefereeGroup" },
+                { "text": "裁判记录管理",     "sref": "app.table-list-RefereeRecord" },
+                { "text": "裁判认证管理",     "sref": "app.table-list-RefereeCert" }
+            ]
         },
         {
-            "text": "ref",
+            "text": "系统管理",
+            "sref": "#",
+            "icon": "icon-settings",
+            "submenu": [
+                { "text": "报名管理",     "sref": "app.table-list-Apply" },
+                { "text": "单位管理",     "sref": "app.table-list-Club" },
+                { "text": "教练管理",     "sref": "app.table-list-Coach" },
+                { "text": "领队管理",     "sref": "app.table-list-Leader" },
+                { "text": "认证管理",     "sref": "app.table-list-Certificate" },
+                { "text": "用户管理",     "sref": "app.table-list-User" }
+            ]
+        },
+        {
+            "text": "待上线",
             "sref": "#",
             "icon": "icon-note",
             "submenu": [
@@ -51,9 +60,15 @@ router.get('/', function(req, res, next) {
                 {"text": "xEditable",   "sref": "app.form-xeditable"},
                 {"text": "Image Crop",  "sref": "app.form-imagecrop"},
                 {"text": "uiSelect",    "sref": "app.form-uiselect"},
-                {"text": "ngDialog",      "sref": "app.ngdialog"}
-            ],
-            "translate": "sidebar.nav.form.FORM"
+                {"text": "ngDialog",      "sref": "app.ngdialog"},
+                { "text": "Extended",     "sref": "app.table-extended", "translate": "sidebar.nav.table.EXTENDED" },
+                { "text": "DataTables",   "sref": "app.table-datatable", "translate": "sidebar.nav.table.DATATABLE" },
+                { "text": "ngTables",     "sref": "app.table-ngtable" },
+                { "text": "ngGrid",       "sref": "app.table-nggrid" },
+                { "text": "uiGrid",       "sref": "app.table-uigrid" },
+                { "text": "xEditable",    "sref": "app.table-xeditable"},
+                { "text": "Angular Grid", "sref": "app.table-angulargrid"}
+            ]
         }
     ]);
 });

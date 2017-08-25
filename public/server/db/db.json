@@ -1,0 +1,130 @@
+{
+  "tables":[
+    {
+      "name":"Apply",
+      "title":"报名管理",
+      "table":"t_apply",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": true
+      }
+    },
+    {
+      "name":"Certificate",
+      "title":"认证管理",
+      "table":"t_certificate",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": true
+      }
+    },
+    {
+      "name":"Club",
+      "title":"单位管理",
+      "table":"t_club",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"Coach",
+      "title":"教练管理",
+      "table":"t_coach",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"Leader",
+      "title":"领队管理",
+      "table":"t_leader",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"User",
+      "title":"用户管理",
+      "table":"user",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"Game",
+      "title":"比赛管理",
+      "table":"t_game",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"Referee",
+      "title":"裁判管理",
+      "table":"t_referee",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"RefereeCert",
+      "title":"裁判认证管理",
+      "table":"t_referee_cert",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"RefereeGroup",
+      "title":"裁判组管理",
+      "table":"t_referee_group",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"RefereeRecord",
+      "title":"裁判记录",
+      "table":"t_referee_record",
+      "operate":{
+        "delete": true,
+        "filter": true,
+        "create": true,
+        "upload": false
+      }
+    },
+    {
+      "name":"RefereeRGroup",
+      "title":"裁判与裁判组映射表",
+      "table":"t_referee_refereegroup"
+    }
+  ]
+}

@@ -1,11 +1,12 @@
-<h3>Data Tables
-   <small>Tables, one step forward.</small>
+<h3>{{table_title}}
+   <small></small>
 </h3>
 <!-- ngRepeat + ngResource-->
-<div ng-controller="myDataTableController">
-   <div ng-if="action==='list'" ng-include="'app/views/qfc-table-list.html'"/>
-   <div ng-if="action==='create'" ng-include="'app/views/qfc-table-update.html'" />
+<div >
+   <div ng-if="action==='list'" ng-include="'app/views/qfc-table-ng-grid.html'"/>
+   <div ng-if="action==='create'" ng-include="'app/views/qfc-table-create.html'" />
    <div ng-if="action==='update'" ng-include="'app/views/qfc-table-update.html'"/>
    <div ng-if="action==='upload'" ng-include="'app/views/qfc-table-upload.html'"/>
+   <div ng-if="action==='create_group'" ng-include="'app/views/qfc-table-create-group.html'"/>
 </div>
 <!-- Chaning data-->

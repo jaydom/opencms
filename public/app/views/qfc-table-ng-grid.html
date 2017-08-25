@@ -1,0 +1,92 @@
+<div ng-controller="ngGridController as demo" class="container-fluid">
+    <div class="panel panel-default" ng-if="loading===false">
+        <script type="text/ng-template" id="headerCheckbox.html">
+            <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" class="select-all" ng-model="checkboxes.checked"/>
+                    <span class="fa fa-check"></span>
+                </label>
+            </div>
+        </script>
+        <table  ng-table-dynamic="tableParams with cols"  class="table table-bordered table-striped">
+            <caption>
+                <form name="searchForm" class="form-inline" novalidate>
+                    <div class="form-group">
+                        <label>显示</label>
+                        <select id="pageSizeBinding" class="form-control" ng-model="newPageSize" ng-change="changePageSize(newPageSize)">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <label>项</label>
+                    </div>
+                    <div class="form-group pull-right">
+                        <div class="input-group" ng-if="hasDeleteBtn">
+                           <button type="button" class="btn btn-danger" ng-disabled="!btn_del_disable"  ng-click="remove_all()"><span class="fa fa-trash-o"></span></button>
+                        </div>
+                        <div class="input-group" ng-if="hasFilterBtn">
+                            <div class="input-group-btn" uib-dropdown>
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"  uib-dropdown-toggle >
+                                    <span class="placeholder">{{fileters["title"]}}</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" uib-dropdown-menu>
+                                    <li ng-repeat="field in inputs['fileters']" >
+                                        <a ng-click="setFilterField(field)">{{field["title"]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <input type="text" class="form-control" placeholder="查找" ng-model="inputs['globalSearchTerm']"  name="searchTerm">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"  ng-click="applyGlobalSearch()"><span class="fa fa-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                        <div class="input-group" ng-if="hasCreateBtn">
+                            <button class="btn btn-default" ng-click="to_create_page()"><span class="fa fa-plus"></span></button>
+                        </div>
+                        <div class="input-group" ng-if="hasGroupCreateBtn">
+                            <button class="btn btn-default" ng-click="to_create_group_page()"><span class="fa fa-plus"></span></button>
+                        </div>
+                        <div class="input-group" ng-if="hasUploadBtn">
+                            <button class="btn btn-default" ng-click="to_upload_page()"><span class="fa fa-upload"></span></button>
+                        </div>
+                    </div>
+                </form>
+
+            </caption>
+            <tbody>
+            <colgroup>
+                <col width="5%"/>
+            </colgroup>
+            <tr ng-repeat="row in $data">
+                <td ng-repeat="col in $columns" ng-switch="col.field">
+                    <div ng-switch-when="selector" data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="checkboxes.items[row.id]" />
+                            <span class="fa fa-check"></span>
+                        </label>
+                    </div>
+                    <div ng-switch-when="operation" data-toggle="tooltip" data-title="Option">
+                        <button type="button" ng-click="to_update_page(row['id'])" class="btn btn-sm btn-warning">
+                            <em class="fa fa-edit"></em>
+                        </button>
+                        <button type="button" ng-click="delete_object(row['id'],row['name'])" class="btn btn-sm btn-danger">
+                            <em class="fa fa-trash-o"></em>
+                        </button>
+                    </div>
+                    <span ng-switch-default>{{row[col.field]}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <script type="text/ng-template" id="confirmDialogId">
+            <div class="ngdialog-message"><h3>确认删除?</h3><p>{{ confirmValue }}</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-danger mr">确认</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">取消</button></div>
+        </script>
+        <script type="text/ng-template" id="errorDialogId">
+            <div class="ngdialog-message"><h3>操作失败</h3><p>可能有数据占用</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-danger mr">确认</button></div>
+        </script>
+    </div>
+</div>

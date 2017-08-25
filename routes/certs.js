@@ -4,14 +4,21 @@ var router = express.Router();
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-    console.log(req.body.user_name);
-    console.log(req.body.user_idcard);
-    //res.send('respond with a resource');
-    if ( req.body['user_name'] == '' || req.body['user_idcard'] == ''){
-        res.redirect("/cert");
-    }else{
-        res.redirect("/cert/result?user_name="+req.body.user_name+"&user_idcard="+req.body.user_idcard);
-    }
+    var conditions = req.body["conditions"];
+    var results = {"err":null,datas:[]};
+    //执行查询
+    req.models.Certificate.find(conditions).first(function(err, datas){
+        if(err){
+            //res.send(err);
+            console.log(err);
+            results["err"] = err;
+            res.json(results);
+        }else{
+            console.log(datas);
+            results["datas"] = datas;
+            res.json(results);
+        }
+    });
 });
 
 

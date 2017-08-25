@@ -1,25 +1,42 @@
-<table datatable="ng" class="row-border hover">
-   <thead>
-   <tr>
-      <th>Person ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th></th>
-   </tr>
-   </thead>
-   <tbody>
-   <tr ng-repeat="person in persons">
-      <td>{{ person.id }}</td>
-      <td>{{ person.firstName }}</td>
-      <td>{{ person.lastName }}</td>
-      <td>
-         <button type="button" ng-click="modifyPerson($index)" class="btn btn-sm btn-warning">
-            <em class="fa fa-edit"></em>
-         </button>
-         <button type="button" ng-click="removePerson($index)" class="btn btn-sm btn-danger">
-            <em class="fa fa-trash-o"></em>
-         </button>
-      </td>
-   </tr>
-   </tbody>
-</table>
+<div ng-controller="CreateValidationController" class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+            <!-- START panel-->
+            <div class="panel panel-default"  ng-if="data!=''" >
+               <div class="panel-body">
+                  <fieldset class="b0">
+                     <div class="pull-right">
+                        <button ng-click="to_list_page()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
+                     </div>
+                  </fieldset>
+                  <fieldset ng-repeat="item in table_profile['fieldset']" ng-include="'app/views/components/'+item['component'] +'.html'" ng-if="!item.component_disable">
+                  </fieldset>
+               </div>
+               <div>
+                  <div class="panel-footer text-center">
+                     <button type="submit" class="btn btn-info" ng-disabled="disable_create_btn" >保存修改</button>
+                  </div>
+               </div>
+            </div>
+
+            <!-- END panel-->
+            <div class="panel panel-default"  ng-if="data==''" >
+               <div class="panel-body">
+                  <fieldset class="b0">
+                     <div class="pull-right">
+                        <button ng-click="back_to_list()" class="btn btn-danger btn-xs"><em class="fa fa-close"></em></button>
+                     </div>
+                  </fieldset>
+               </div>
+            </div>
+         </form>
+      </div>
+      <script type="text/ng-template" id="confirmDialogId">
+         <div class="ngdialog-message"><h3>修改成功</h3><p>{{ confirmValue }}</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-success mr">确认</button></div>
+      </script>
+      <script type="text/ng-template" id="errorDialogId">
+         <div class="ngdialog-message"><h3>提交失败</h3><p>{{ confirmValue }}</p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-danger mr">确认</button></div>
+      </script>
+   </div>
+</div>

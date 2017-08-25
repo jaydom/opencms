@@ -1,0 +1,103 @@
+<div class="bs-docs-header" id="content" tabindex="-1">
+    <div class="container">
+        <h1>考级报名</h1>
+    </div>
+</div>
+
+<div class="container bs-docs-container">
+    <div class="row">
+        <div class="col-md-2" role="main">
+            <div class="list-group" ng-init="vm.activeTab=1">
+                <a class="list-group-item" style="background-color: #6a5094;color: white;">选择报名方式</a>
+                <a href="javascript:;" ng-click="vm.activeTab = 1" class="list-group-item">个人报名</a>
+                <a href="javascript:;" ng-click="vm.activeTab = 2" class="list-group-item">团体报名</a>
+            </div>
+        </div>
+        <div class="col-md-10" role="main">
+            <div class="tab-content tab-bordered">
+                <div class="tab-panel" ng-show="vm.activeTab == 1"  ng-controller="CreateValidationController">
+                    <h1  class="page-header" style="margin-top: 4px">个人报名</h1>
+                    <form name="formValidate" class="form-validate form-horizontal" ng-submit="submitForm()">
+                        <!-- START panel-->
+                        <fieldset ng-repeat="item in table_profile['fieldset']" ng-include="'app/views/components/'+item['component'] +'.html'" ng-if="!item.component_disable">
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <button type="submit" class="btn btn-info">提交</button>
+                            </div>
+                        </div>
+                        <!-- END panel-->
+                    </form>
+                </div>
+                <div class="tab-panel" ng-show="vm.activeTab == 2" ng-controller="FileUploadController">
+                    <h1  class="page-header" style="margin-top: 4px">团体报名</h1>
+                    <div class="panel-body">
+                        <input filestyle="" type="file" accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"  data-button-text="多选" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader" multiple="" class="form-control" filters="customFilter2"/>
+                        <hr/>
+                        <p ng-if="uploader.queue.length" class="pull-right label label-info">队列长度: {{ uploader.queue.length }}</p>
+                        <h4 class="page-header mt0">上传队列</h4>
+                        <p ng-if="!uploader.queue.length" class="lead text-center">队列里没有文件</p>
+                        <div ng-if="uploader.queue.length">
+                            <table ng-if="uploader.queue.length" class="table">
+                                <thead>
+                                <tr>
+                                    <th width="50%">名称</th>
+                                    <th ng-show="uploader.isHTML5">大小</th>
+                                    <th ng-show="uploader.isHTML5">进度</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in uploader.queue">
+                                    <td>
+                                        <strong>{{ item.file.name }}</strong><span style="color: red"> {{item.error}}</span>
+                                    </td>
+                                    <td ng-show="uploader.isHTML5" nowrap="">{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                    <td ng-show="uploader.isHTML5">
+                                        <div style="margin-bottom: 0;" class="progress progress-xs">
+                                            <div role="progressbar" ng-style="{ 'width': item.progress + '%' }" class="progress-bar"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                 <span ng-show="item.isSuccess">
+                                    <em class="fa fa-check fa-fw"></em>
+                                 </span>
+                                        <span ng-show="item.isCancel">
+                                    <em class="fa fa-ban-circle fa-fw"></em>
+                                 </span>
+                                        <span ng-show="item.isError">
+                                    <em class="fa fa-times fa-fw" style="color: red"></em>
+                                 </span>
+                                    </td>
+                                    <td nowrap="">
+                                        <button type="button" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess" class="btn btn-info btn-xs">
+                                            <span class="icon-cloud-upload mr"></span>上传</button>
+                                        <button type="button" ng-click="item.cancel()" ng-disabled="!item.isUploading" class="btn btn-warning btn-xs">
+                                            <span class="icon-close mr"></span>取消</button>
+                                        <button type="button" ng-click="item.remove()" class="btn btn-danger btn-xs">
+                                            <span class="icon-trash mr"></span>删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr/>
+                        <div>
+                            <p>队列进度:</p>
+                            <div style="" class="progress progress-xs">
+                                <div role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <button type="button" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length" class="btn btn-info btn-s">
+                            <span class="icon-cloud-upload mr"></span>上传所有</button>
+                        <button type="button" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading" class="btn btn-warning btn-s">
+                            <span class="icon-close mr"></span>取消所有</button>
+                        <button type="button" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length" class="btn btn-danger btn-s">
+                            <span class="icon-trash mr"></span>Remove all</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

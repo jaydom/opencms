@@ -1,0 +1,14 @@
+<div ng-controller="DatetimepickerDemoCtrl" class="form-group">
+    <label class="col-sm-2 control-label">{{item.title}}</label>
+    <div class="col-sm-6">
+        <p class="input-group">
+            <input type="text" name="{{item.field}}" ng-required="item.required" datepicker-popup="{{format}}" ng-model="$parent.data[$index]" is-open="opened" max-date="'2050-12-12'" datepicker-options="dateOptions"  close-text="Close" class="form-control" />
+            <span class="input-group-btn">
+                <button type="button" ng-click="open($event)" class="btn btn-default">
+                   <em class="fa fa-calendar"></em>
+                </button>
+             </span>
+        </p>
+        <span ng-show="validateInput('{{item.field}}', 'required')" class="text-danger" ng-if="item.required">必须填写</span>
+    </div>
+</div>

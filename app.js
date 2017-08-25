@@ -13,7 +13,10 @@ var pages = require('./routes/pages');
 var files = require('./routes/files');
 var certs = require('./routes/certs');
 var datas = require('./routes/datas');
+var config = require("./routes/config");
 var domain = require("domain");
+
+var db_conf = config.get_db_conf();
 
 var app = express();
 
@@ -44,38 +47,18 @@ app.use(function (req,res, next) {
     d.add(res);
     d.run(next);
 });
-
-app.use(orm.express("postgres://postgres:mysecretpassword@192.168.56.101:5432/opencms", {
+//指定中国时区
+app.use(orm.express("postgres://postgres:mysecretpassword@192.168.56.101:5432/opencms?timezone='CST'", {
+//app.use(orm.express("postgres://postgres:mysecretpassword@postgres:5432/opencms?timezone='CST'",{
     define: function (db, models, next) {
-        models.User = db.define("user", {
-            id          :Number,
-            name        :String,
-            password    :String
-        });
-        models.Certificate = db.define("T_certificate", {
-            id          :Number,
-            player_id  :Number,
-            player_name :String,
-            exam_type   :String,
-            exam_level       :Number,
-            exam_address     :String,
-            exam_time        :Date,
-            cert_id          :Number,
-            cert_time        :Date,
-            club             :String,
-            cert_image      :String,
-            cert_image_md5  :String,
-            exam_area      :String,
-            sex  :String,
-            tel  :String,
-            idcard :String
-        });
+        for(var key in db_conf){
+            models[key] = db.define(db_conf[key]["table"], db_conf[key]["cols"]);
+        }
         next();
     }
 }));
 
 app.use('/', index);
-app.use('/2', index);
 app.use('/cert', certs);
 app.use('/admin', index);
 app.use('/app/pages', pages);

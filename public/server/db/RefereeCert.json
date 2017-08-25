@@ -1,0 +1,17 @@
+{
+  "db_cols":[
+    {"field":"id","title":"编号","sortable": "yes","show": false,"type":"Number","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"sort_id","title":"序号","sortable": "yes","show": false,"type":"serial","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"name","title":"名字","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"cert_unit","title":"发证单位","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"cert_date","title":"发证日期","sortable": "yes","show": true,"type":"String","filter":"like","component":"Date","component_disable":false,"required":true},
+    {"field":"cert_id","title":"证书号","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"project","title":"执裁项目","sortable": "yes","show": true,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"level","title":"裁判等级","sortable": "yes","show": true,"type":"String","filter":"yes","component":"select","select_option":["1","2","3","4","5","6","7","8","9","10"],"component_disable":false,"required":true},
+    {"field":"referee_name","title":"裁判","sortable": "yes","show": true,"type":"String","filter":"like","component":"text_foreign","component_disable":false,"required":true,"foreign_table":"Referee","foreign_id":"referee_id"},
+    {"field":"referee_id","title":"裁判编号","sortable": "yes","show": true,"type":"String","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"create_date","title":"创建日期","sortable": "yes","show": true,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"update_date","title":"更新日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"delete_date","title":"删除日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false}
+  ]
+}

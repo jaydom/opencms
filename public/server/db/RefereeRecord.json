@@ -1,0 +1,17 @@
+{
+  "db_cols":[
+    {"field":"id","title":"编号","sortable": "yes","show": false,"type":"String","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"sort_id","title":"序号","sortable": "yes","show": false,"type":"serial","filter":"no","component":"text","component_disable":true,"required":true},
+    {"field":"name","title":"名字","sortable": "yes","show": false,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"game_name","title":"比赛","sortable": "yes","show": true,"type":"String","filter":"yes","component":"text_foreign","component_disable":false,"required":true,"foreign_table":"Game","foreign_id":"game_id"},
+    {"field":"game_id","title":"比赛编号","sortable": "yes","show": false,"type":"String","filter":"yes","component":"text","component_disable":true,"required":true},
+    {"field":"referee_name","title":"裁判","sortable": "yes","show": true,"type":"String","filter":"yes","component":"text_foreign","component_disable":false,"required":true,"foreign_table":"Referee","foreign_id":"referee_id"},
+    {"field":"referee_id","title":"裁判编号","sortable": "yes","show": false,"type":"String","filter":"yes","component":"text","component_disable":true,"required":true},
+    {"field":"project","title":"项目","sortable": "yes","show": true,"type":"String","filter":"yes","component":"text","component_disable":false,"required":true},
+    {"field":"record","title":"评价","sortable": "yes","show": true,"type":"String","filter":"yes","component":"select","select_option":["优","良","中","差"],"component_disable":false,"required":true},
+    {"field":"description","title":"备注","sortable": "yes","show": false,"type":"String","filter":"like","component":"text","component_disable":false,"required":true},
+    {"field":"create_date","title":"创建日期","sortable": "yes","show": true,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"update_date","title":"更新日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false},
+    {"field":"delete_date","title":"删除日期","sortable": "yes","show": false,"type":"Date","filter":"no","component":"text","component_disable":true,"required":false}
+  ]
+}
